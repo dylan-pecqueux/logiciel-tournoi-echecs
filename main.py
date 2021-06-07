@@ -1,10 +1,10 @@
-from controllers.base_controller import Controller
-from views.base import View
+from controllers.base_controller import BaseController
+from views.base_view import BaseView
 
 
 def main():
-    view = View()
-    programm = Controller(view)
+    view = BaseView()
+    programm = BaseController(view)
     programm.run()
 
 
