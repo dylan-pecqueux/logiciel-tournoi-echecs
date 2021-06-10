@@ -9,3 +9,11 @@ class Tournament:
         self.players_list = players_list
         self.time_control = time_control
         self.description = description
+
+    def __str__(self):
+        """Used for print player in view"""
+        return f" {self.name}\n lieu : {self.location}\n du {self.start_date} au {self.end_date}\n nombre de tours {self.number_of_turns}, controle du temps : {self.time_control}\n {self.description}\n Joueurs du tournoi : \n {self.players_list[0]}\n {self.players_list[1]}"
+
+    def players_in_tournament(self):
+        for player in self.players_list:
+            yield player

@@ -10,8 +10,8 @@ class BaseController:
         """Has a view"""
         self.view = view
         self.player_controller = PlayerController()
-        self.tournament_controller = TournamentController()
         self.players = Players()
+        self.tournament_controller = TournamentController(self.players)
 
     def menu_choice(self):
         """Navigate in to the programm"""
@@ -25,7 +25,7 @@ class BaseController:
             self.player_controller.view_all_players(self.players)
             self.menu_choice()
         if user_choice == "3":
-            self.tournament_controller.add_tournament(self.players)
+            self.tournament_controller.add_tournament()
 
     def run(self):
         """Run the programm"""
