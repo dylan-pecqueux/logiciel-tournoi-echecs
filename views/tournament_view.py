@@ -44,3 +44,10 @@ class TournamentView:
 
     def display_tournament(self, tournament):
         print(tournament)
+
+    def display_tournament_info(self, tournament):
+        print(tournament)
+        print("1 - Commencer le tournoi\n"
+              "2 - Revenir au menu")
+        user_choice = input("Que voulez-vous faire ? : ")
+        return user_choice

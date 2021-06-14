@@ -7,6 +7,7 @@ class BaseView:
         print("1 - Ajouter un joueur\n"
               "2 - Voir tous les joueurs\n"
               "3 - Créer un tournoi\n"
+              "4 - Voir tous les tournois\n"
               "0 - Quitter")
         choice = input("Que voulez vous faire ? : ")
         return choice

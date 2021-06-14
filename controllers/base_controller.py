@@ -1,6 +1,7 @@
 from controllers.player_controller import PlayerController
 from controllers.tournament_controller import TournamentController
 from models.players import Players
+from models.tournaments import Tournaments
 
 
 class BaseController:
@@ -11,7 +12,9 @@ class BaseController:
         self.view = view
         self.player_controller = PlayerController()
         self.players = Players()
-        self.tournament_controller = TournamentController(self.players)
+        self.tournaments = Tournaments()
+        self.tournament_controller = TournamentController(
+            self.players, self.tournaments)
 
     def menu_choice(self):
         """Navigate in to the programm"""
@@ -25,7 +28,11 @@ class BaseController:
             self.player_controller.view_all_players(self.players)
             self.menu_choice()
         if user_choice == "3":
-            self.tournament_controller.add_tournament()
+            self.tournament_controller.add_tournament(self.tournaments)
+            self.menu_choice()
+        if user_choice == "4":
+            self.tournament_controller.view_all_tournaments(self.tournaments)
+            self.menu_choice()
 
     def run(self):
         """Run the programm"""
