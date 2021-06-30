@@ -3,17 +3,16 @@ from views.round_view import RoundView
 
 
 class RoundController:
-    def __init__(self):
+    def __init__(self, round_number):
         self.round = Round()
         self.round_view = RoundView()
+        self.round_number = round_number
 
     def first_pair_generation(self, players):
         self.round.new_match(players[0][0], players[1][0])
-        self.view_round()
 
     def pair_generation(self, players):
         self.round.new_match(players[0][0], players[1][0])
-        self.view_round()
 
     def view_round(self):
         end_of_round = None
@@ -25,7 +24,6 @@ class RoundController:
         for player in all_players:
             if winner_player[0] == player[0]:
                 player[1] += score
-                print("ça marche bien")
                 break
 
     def input_score(self, all_players):
@@ -55,5 +53,11 @@ class RoundController:
     def display_classment_players(self, players):
         self.round_view.display_classment_players(players)
 
-    def run_round():
-        pass
+    def run_round(self, tournament):
+        if self.round_number == 1:
+            self.first_pair_generation(tournament.players_list)
+        else:
+            self.pair_generation(tournament.players_list)
+        self.view_round()
+        self.input_score(tournament.players_list)
+        self.sort_players(tournament)

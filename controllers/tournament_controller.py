@@ -41,17 +41,10 @@ class TournamentController:
                 self.start_tournament(self.all_tournaments[int(tournament_to_view)])
 
     def start_tournament(self, tournament):
-        starter_round = RoundController()
-        tournament.add_round(starter_round.round)
-        starter_round.first_pair_generation(tournament.players_list)
-        starter_round.input_score(tournament.players_list)
-        starter_round.sort_players(tournament)
-        for i in range(3):
-            print("ça passe ici")
-            self.new_round(tournament)
-
-    def new_round(self, tournament):
-        start_new_round = RoundController()
-        tournament.add_round(start_new_round.round)
-        start_new_round.pair_generation(tournament.players_list)
-        start_new_round.input_score(tournament.players_list)
+        """start tournament and run round 4 time
+        i == number of round
+        """
+        for i in range(1, 5):
+            start_new_round = RoundController(i)
+            tournament.add_round(start_new_round.round)
+            start_new_round.run_round(tournament)
