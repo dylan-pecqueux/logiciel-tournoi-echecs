@@ -2,7 +2,6 @@ from controllers.player_controller import PlayerController
 
 
 class TournamentView:
-
     def __init__(self, all_players):
         self.list_of_players = all_players
 
@@ -19,10 +18,7 @@ class TournamentView:
         info_tounament.append(end_date)
         number_of_turns = input("Entrez le nombre de tours : ")
         info_tounament.append(number_of_turns)
-        players = []
-        for number in range(2):
-            player = self.add_player_to_tournament()
-            players.append(player)
+        players = self.add_player_to_tournament()
         info_tounament.append(players)
         time_control = input("Entrez le mode de controle du temps : ")
         info_tounament.append(time_control)
@@ -32,22 +28,26 @@ class TournamentView:
         return info_tounament
 
     def add_player_to_tournament(self):
+        players = []
 
-        print("Selectionnez les joueurs du tournoi : ")
-        for index, player in enumerate(self.list_of_players):
-            print(index, player)
-        player_to_add = input(
-            "Tapez le numero correspondant au joueur que vous voulez ajouter : ")
-        player_selection = self.list_of_players[int(player_to_add)]
-        self.list_of_players.remove(player_selection)
-        return player_selection
+        for i in range(2):
+            print("Selectionnez les joueurs du tournoi : ")
+            for index, player in enumerate(self.list_of_players):
+                if [player, 0] not in players:
+                    print(index, player)
+            player_to_add = input(
+                "Tapez le numero correspondant au joueur que vous voulez ajouter : "
+            )
+            player_selection = self.list_of_players[int(player_to_add)]
+            players.append([player_selection, 0])
+
+        return players
 
     def display_tournament(self, tournament):
         print(tournament)
 
     def display_tournament_info(self, tournament):
         print(tournament)
-        print("1 - Commencer le tournoi\n"
-              "2 - Revenir au menu")
+        print("1 - Commencer le tournoi\n" "2 - Revenir au menu")
         user_choice = input("Que voulez-vous faire ? : ")
         return user_choice

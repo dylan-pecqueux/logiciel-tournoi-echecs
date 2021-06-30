@@ -1,6 +1,15 @@
 class Tournament:
-
-    def __init__(self, name, location, start_date, end_date, number_of_turns, players_list, time_control, description):
+    def __init__(
+        self,
+        name,
+        location,
+        start_date,
+        end_date,
+        number_of_turns,
+        players_list,
+        time_control,
+        description,
+    ):
         self.name = name
         self.location = location
         self.start_date = start_date
@@ -9,10 +18,15 @@ class Tournament:
         self.players_list = players_list
         self.time_control = time_control
         self.description = description
+        self.rounds = []
 
     def sort_players_by_classment(self):
         self.players_list = sorted(
-            self.players_list, key=lambda player: player.classment)
+            self.players_list, key=lambda player: player[0].classment
+        )
+
+    def add_round(self, round):
+        self.rounds.append(round)
 
     def name_and_date(self):
         return f"{self.name}, début le {self.start_date}"

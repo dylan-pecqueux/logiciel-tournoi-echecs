@@ -2,7 +2,6 @@ from models.match import Match
 
 
 class Round:
-
     def __init__(self, round_number=1):
         self.all_matchs = []
         self.round_number = round_number
