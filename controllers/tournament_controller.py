@@ -31,8 +31,6 @@ class TournamentController:
             if start_tournament_or_not == "1":
                 self.start_tournament(
                     self.all_tournaments[int(tournament_to_view)])
-            else:
-                return
 
     def start_tournament(self, tournament):
         starter_round = RoundController()
