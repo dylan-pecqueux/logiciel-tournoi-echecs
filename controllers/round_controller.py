@@ -47,3 +47,13 @@ class RoundController:
             self.find_player(match.second_player, all_players, 0.5)
         else:
             self.add_score(match, all_players)
+
+    def sort_players(self, tournament):
+        tournament.sort_players_by_score()
+        self.display_classment_players(tournament.players_list)
+
+    def display_classment_players(self, players):
+        self.round_view.display_classment_players(players)
+
+    def run_round():
+        pass

@@ -45,6 +45,7 @@ class TournamentController:
         tournament.add_round(starter_round.round)
         starter_round.first_pair_generation(tournament.players_list)
         starter_round.input_score(tournament.players_list)
+        starter_round.sort_players(tournament)
         for i in range(3):
             print("ça passe ici")
             self.new_round(tournament)

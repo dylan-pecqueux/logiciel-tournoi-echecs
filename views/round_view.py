@@ -13,3 +13,10 @@ class RoundView:
         print(f"2 - {match.second_player[0].first_name}")
         winner = input('Entrez le numéro du joueur gagnant ou "eg" en cas de match nul')
         return winner
+
+    def display_classment_players(self, players):
+        for player in players:
+            print(
+                f"{player[0].first_name} {player[0].last_name}, classement : {player[0].classment}"
+            )
+            print(f"Score au tournoi : {player[1]}")
