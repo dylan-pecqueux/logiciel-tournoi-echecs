@@ -20,6 +20,14 @@ class RoundController:
         while end_of_round != "y":
             end_of_round = self.round_view.display_all_matchs(self.round.all_matchs)
 
+    def find_player(self, winner_player, all_players, score):
+        """Add new score in tournament players list"""
+        for player in all_players:
+            if winner_player[0] == player[0]:
+                player[1] += score
+                print("ça marche bien")
+                break
+
     def input_score(self, all_players):
         for match in self.round.all_matchs:
             self.add_score(match, all_players)
@@ -28,16 +36,14 @@ class RoundController:
         winner = self.round_view.input_score(match)
         if winner == "1":
             match.first_player[1] = 1
-            for player in all_players:
-                if match.first_player[0] == player[0]:
-                    player[1] += 1
-                    print("ça marche bien")
-                    break
-
+            self.find_player(match.first_player, all_players, 1)
         elif winner == "2":
             match.second_player[1] = 1
+            self.find_player(match.second_player, all_players, 1)
         elif winner == "eg":
             match.first_player[1] = 0.5
             match.second_player[1] = 0.5
+            self.find_player(match.first_player, all_players, 0.5)
+            self.find_player(match.second_player, all_players, 0.5)
         else:
             self.add_score(match, all_players)
