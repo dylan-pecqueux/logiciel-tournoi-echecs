@@ -1,6 +1,5 @@
 from controllers.player_controller import PlayerController
 from controllers.tournament_controller import TournamentController
-from models.players import Players
 from models.tournaments import Tournaments
 from db.player_dao import PlayerDAO
 
