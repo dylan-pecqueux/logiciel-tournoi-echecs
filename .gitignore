@@ -1,3 +1,4 @@
 env/
 flake-report/
 __pycache__/
+db.json
