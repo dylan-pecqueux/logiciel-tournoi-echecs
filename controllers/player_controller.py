@@ -1,15 +1,14 @@
 from models.player import Player
 from views.players_view import PlayersView
-from db.player_dao import PlayerDAO
 
 
 class PlayerController:
-    def __init__(self):
+    def __init__(self, player_dao):
         """Has a view and a list of players"""
         self.view = PlayersView()
-        self.player_dao = PlayerDAO()
+        self.player_dao = player_dao
 
-    def add_player(self, all_players):
+    def add_player(self):
         """Had a player"""
         info_player = self.view.prompt_for_player()
         new_player = Player(
@@ -21,10 +20,10 @@ class PlayerController:
         )
         self.player_dao.save(new_player)
         self.view.display_player(new_player)
-        all_players.add_player_to_list(new_player)
+        self.player_dao.add_player(new_player)
 
     def add_another_player(self):
         return self.view.prompt_add_another_player() == "y"
 
-    def view_all_players(self, players):
-        self.view.display_all_players(players.all_players)
+    def view_all_players(self):
+        self.view.display_all_players(self.player_dao.get_players())

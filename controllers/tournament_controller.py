@@ -7,7 +7,7 @@ from controllers.round_controller import RoundController
 
 class TournamentController:
     def __init__(self, players, tournaments):
-        self.tournament_view = TournamentView(players.all_players)
+        self.tournament_view = TournamentView(players)
         self.tournaments_view = TournamentsView()
         self.all_tournaments = tournaments.all_tournaments
 

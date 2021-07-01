@@ -1,6 +1,3 @@
-from controllers.player_controller import PlayerController
-
-
 class TournamentView:
     def __init__(self, all_players):
         self.list_of_players = all_players
