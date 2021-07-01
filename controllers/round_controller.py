@@ -8,26 +8,45 @@ class RoundController:
         self.round_view = RoundView()
         self.round_number = round_number
 
-    def first_pair_generation(self, players):
-        """Suiss algo : Split in two list players list by middle and associate the player with the same index in the other list"""
-        first_list = players[: len(players) // 2]
-        second_list = players[len(players) // 2 :]
+    def first_pair_generation(self, tournament):
+        """Swiss algo : Split in two list players list by middle and associate the player with the same index in the other list"""
+        lenght = len(tournament.players_list) // 2
+        first_list = tournament.players_list[:lenght]
+        second_list = tournament.players_list[lenght:]
 
         for index, player in enumerate(first_list):
-            self.round.new_match(player[0], second_list[index][0])
+            self.round.new_match(player[0], second_list[index][0], tournament)
 
     def pair_generation(self, tournament):
-        for round in tournament.rounds:
-            if (
-                self.round.new_match(
-                    tournament.players_list[0][0], tournament.players_list[1][0]
-                )
-                in round.all_matchs
-            ):
-                pass
-        self.round.new_match(
-            tournament.players_list[0][0], tournament.players_list[1][0]
-        )
+        players = []
+        for player in tournament.players_list:
+            players.append(player[0])
+        for index, player in enumerate(players):
+            players = self.check_if_already_played(index, player, players, tournament)
+
+    def check_if_already_played(
+        self, index, player, players, tournament, check_player_after=1
+    ):
+        already_play = player.get_opponents(tournament)
+        if players[index + check_player_after] not in already_play:
+            self.round.new_match(
+                player, players[index + check_player_after], tournament
+            )
+            players.remove(players[index + check_player_after])
+            players.remove(player)
+            return players
+        elif index + check_player_after == len(players) - 1:
+            self.round.new_match(
+                player, players[index + check_player_after], tournament
+            )
+            players.remove(players[index + check_player_after])
+            players.remove(player)
+            return players
+        else:
+            check_player_after += 1
+            self.check_if_already_played(
+                index, player, players, tournament, check_player_after
+            )
 
     def view_round(self):
         end_of_round = None
@@ -70,7 +89,7 @@ class RoundController:
 
     def run_round(self, tournament):
         if self.round_number == 1:
-            self.first_pair_generation(tournament.players_list)
+            self.first_pair_generation(tournament)
         else:
             self.pair_generation(tournament)
         self.view_round()
