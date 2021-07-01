@@ -9,10 +9,25 @@ class RoundController:
         self.round_number = round_number
 
     def first_pair_generation(self, players):
-        self.round.new_match(players[0][0], players[1][0])
+        """Suiss algo : Split in two list players list by middle and associate the player with the same index in the other list"""
+        first_list = players[: len(players) // 2]
+        second_list = players[len(players) // 2 :]
 
-    def pair_generation(self, players):
-        self.round.new_match(players[0][0], players[1][0])
+        for index, player in enumerate(first_list):
+            self.round.new_match(player[0], second_list[index][0])
+
+    def pair_generation(self, tournament):
+        for round in tournament.rounds:
+            if (
+                self.round.new_match(
+                    tournament.players_list[0][0], tournament.players_list[1][0]
+                )
+                in round.all_matchs
+            ):
+                pass
+        self.round.new_match(
+            tournament.players_list[0][0], tournament.players_list[1][0]
+        )
 
     def view_round(self):
         end_of_round = None
@@ -57,7 +72,7 @@ class RoundController:
         if self.round_number == 1:
             self.first_pair_generation(tournament.players_list)
         else:
-            self.pair_generation(tournament.players_list)
+            self.pair_generation(tournament)
         self.view_round()
         self.input_score(tournament.players_list)
         self.sort_players(tournament)

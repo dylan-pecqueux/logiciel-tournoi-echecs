@@ -42,7 +42,7 @@ class TournamentController:
 
     def start_tournament(self, tournament):
         """start tournament and run round 4 time
-        i == number of round
+        i == number of actual round
         """
         for i in range(1, 5):
             start_new_round = RoundController(i)
