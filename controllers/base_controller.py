@@ -23,7 +23,7 @@ class BaseController:
         self.player_dao.deserialized_players()
 
     def load_tournaments_from_db(self):
-        self.tournament_dao.deserialized_tournaments()
+        self.tournament_dao.load_tournaments()
 
     def menu_choice(self):
         """Navigate in to the programm"""

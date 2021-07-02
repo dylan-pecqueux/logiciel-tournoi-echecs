@@ -48,3 +48,12 @@ class TournamentView:
         print("1 - Commencer le tournoi\n" "2 - Revenir au menu")
         user_choice = input("Que voulez-vous faire ? : ")
         return user_choice
+
+    def display_tournament_end(self, classment):
+        print("Tous les rounds ont étaient joués, le tournoi est terminé")
+        print("Voici le classement final : ")
+        for player in classment:
+            print(
+                f"{player[0].first_name} {player[0].last_name}, classement : {player[0].classment}"
+            )
+            print(f"Score au tournoi : {player[1]}")

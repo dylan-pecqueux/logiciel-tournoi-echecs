@@ -53,3 +53,7 @@ class TournamentController:
             tournament.add_round(start_new_round.round)
             start_new_round.run_round(tournament)
             self.tournament_dao.update_tournament(tournament)
+        self.tournament_end(tournament.players_list)
+
+    def tournament_end(self, classment):
+        self.tournament_view.display_tournament_end(classment)

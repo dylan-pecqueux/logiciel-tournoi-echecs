@@ -13,6 +13,15 @@ class PlayerDAO(AbstractDAO):
         next_id = lenght_players_table + 1
         return next_id
 
+    def get_players(self):
+        return self.db.players
+
+    def all_players(self):
+        return self.db.all_players()
+
+    def add_player(self, player):
+        self.db.add_player(player)
+
     def serialized_player(self, player):
         serialized_player = {
             "last_name": player.last_name,
@@ -22,15 +31,6 @@ class PlayerDAO(AbstractDAO):
             "classment": player.classment,
         }
         return serialized_player
-
-    def get_players(self):
-        return self.db.players
-
-    def all_players(self):
-        return self.db.all_players()
-
-    def add_player(self, player):
-        self.db.add_player(player)
 
     def deserialized_players(self):
         players = self.all_players()
