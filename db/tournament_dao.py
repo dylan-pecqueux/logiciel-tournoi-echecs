@@ -1,5 +1,7 @@
 from db.abstract_dao import AbstractDAO
 from models.tournament import Tournament
+from models.round import Round
+from models.match import Match
 
 
 class TournamentDAO(AbstractDAO):
@@ -77,6 +79,7 @@ class TournamentDAO(AbstractDAO):
             time_control = tournament["time_control"]
             description = tournament["description"]
             players_list = self.get_players_of_tournament(tournament["players_list"])
+            rounds = self.deserialized_rounds(tournament["rounds"])
             load_tournament = Tournament(
                 name,
                 location,
@@ -86,8 +89,37 @@ class TournamentDAO(AbstractDAO):
                 players_list,
                 time_control,
                 description,
+                rounds,
             )
             self.add_tournament(load_tournament)
+
+    def deserialized_rounds(self, rounds):
+        deserialized_rounds = []
+        if rounds:
+            for round in rounds:
+                round_number = round["round_number"]
+                all_matchs = self.deserialized_matches(round["all_matchs"])
+                load_round = Round(round_number, all_matchs)
+                deserialized_rounds.append(load_round)
+            return deserialized_rounds
+        else:
+            return []
+
+    def deserialized_matches(self, matches, tournament):
+        deserialized_matches = []
+        for match in matches:
+            first_player_inst = self.find_player(match["first_player"][0])
+            first_player_score = match["first_player"][1]
+            second_player_inst = self.find_player(match["second_player"][0])
+            second_player_score = match["second_player"][1]
+            load_match = Match(
+                first_player_inst,
+                second_player_inst,
+                tournament,
+                first_player_score,
+                second_player_score,
+            )
+            deserialized_matches.append(load_match)
 
     def get_players_of_tournament(self, players_list):
         players = []
