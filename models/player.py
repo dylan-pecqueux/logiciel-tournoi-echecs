@@ -1,5 +1,5 @@
 class Player:
-    def __init__(self, last_name, first_name, date_of_birth, sex, classment):
+    def __init__(self, last_name, first_name, date_of_birth, sex, classment, id):
         """Has last name, first name, date of birth (dd/mm/aaaa), sex (m or f)
         and a positive number for classment
         """
@@ -8,6 +8,7 @@ class Player:
         self.date_of_birth = date_of_birth
         self.sex = sex
         self.classment = classment
+        self.id = id
         self.matches = []
 
     def play_match(self, match):

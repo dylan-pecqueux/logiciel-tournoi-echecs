@@ -17,8 +17,9 @@ class PlayerController:
             info_player[2],
             info_player[3],
             int(info_player[4]),
+            self.player_dao.give_id(),
         )
-        self.player_dao.save_player(new_player)
+        self.player_dao.save(new_player)
         self.view.display_player(new_player)
         self.player_dao.add_player(new_player)
 

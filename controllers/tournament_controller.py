@@ -6,10 +6,11 @@ from controllers.round_controller import RoundController
 
 
 class TournamentController:
-    def __init__(self, players, tournaments):
+    def __init__(self, players, tournaments, tournament_dao):
         self.tournament_view = TournamentView(players)
         self.tournaments_view = TournamentsView()
         self.all_tournaments = tournaments.all_tournaments
+        self.tournament_dao = tournament_dao
 
     def add_tournament(self, tournaments):
         info_tounament = self.tournament_view.prompt_info_tournament()
@@ -23,6 +24,7 @@ class TournamentController:
             info_tounament[6],
             info_tounament[7],
         )
+        self.tournament_dao.save(new_tournament)
         new_tournament.sort_players_by_classment()
         tournaments.add_tournament(new_tournament)
         self.tournament_view.display_tournament(new_tournament)

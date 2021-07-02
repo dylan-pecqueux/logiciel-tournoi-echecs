@@ -2,6 +2,7 @@ from controllers.player_controller import PlayerController
 from controllers.tournament_controller import TournamentController
 from models.tournaments import Tournaments
 from db.player_dao import PlayerDAO
+from db.tournament_dao import TournamentDAO
 
 
 class BaseController:
@@ -10,12 +11,13 @@ class BaseController:
     def __init__(self, view):
         """Has a view"""
         self.player_dao = PlayerDAO()
+        self.tournament_dao = TournamentDAO()
         self.load_players_in_db()
         self.view = view
         self.player_controller = PlayerController(self.player_dao)
         self.tournaments = Tournaments()
         self.tournament_controller = TournamentController(
-            self.player_dao.get_players(), self.tournaments
+            self.player_dao.get_players(), self.tournaments, self.tournament_dao
         )
 
     def load_players_in_db(self):

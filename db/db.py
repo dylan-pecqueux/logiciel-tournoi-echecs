@@ -24,3 +24,6 @@ class DB:
 
     def add_tournament(self, tournament):
         self.tournaments.append(tournament)
+
+    def lenght_players_table(self):
+        return len(self.players_table)

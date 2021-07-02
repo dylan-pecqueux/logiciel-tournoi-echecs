@@ -1,5 +1,5 @@
 from abc import ABC
-from db.players_db import DB
+from db.db import DB
 
 
 class AbstractDAO(ABC):
