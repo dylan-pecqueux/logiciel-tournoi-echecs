@@ -51,3 +51,4 @@ class TournamentController:
             start_new_round = RoundController(i)
             tournament.add_round(start_new_round.round)
             start_new_round.run_round(tournament)
+            self.tournament_dao.update_tournament(tournament)

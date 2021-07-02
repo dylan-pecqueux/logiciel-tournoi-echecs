@@ -15,6 +15,9 @@ class DB:
     def save_tournament(self, tournament):
         self.tournaments_table.insert(tournament)
 
+    def update_tournament(self, tournament, id):
+        self.tournaments_table.update(tournament, doc_ids=[id])
+
     def all_players(self):
         serialized_players = self.players_table.all()
         return serialized_players

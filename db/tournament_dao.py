@@ -68,6 +68,10 @@ class TournamentDAO(AbstractDAO):
     def get_tournaments(self):
         return self.db.tournaments
 
+    def update_tournament(self, tournament):
+        serialized_tournament = self.serialized_tournament(tournament)
+        self.db.update_tournament(serialized_tournament, tournament.id)
+
     def give_id(self):
         lenght_tournaments_table = self.db.lenght_tournaments_table()
         next_id = lenght_tournaments_table + 1
