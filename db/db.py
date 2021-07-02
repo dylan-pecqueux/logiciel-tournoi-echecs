@@ -31,3 +31,6 @@ class DB:
 
     def lenght_players_table(self):
         return len(self.players_table)
+
+    def lenght_tournaments_table(self):
+        return len(self.tournaments_table)

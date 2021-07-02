@@ -68,6 +68,11 @@ class TournamentDAO(AbstractDAO):
     def get_tournaments(self):
         return self.db.tournaments
 
+    def give_id(self):
+        lenght_tournaments_table = self.db.lenght_tournaments_table()
+        next_id = lenght_tournaments_table + 1
+        return next_id
+
     def deserialized_tournaments(self):
         tournaments = self.all_tournaments()
         for tournament in tournaments:
@@ -79,6 +84,7 @@ class TournamentDAO(AbstractDAO):
             time_control = tournament["time_control"]
             description = tournament["description"]
             players_list = self.get_players_of_tournament(tournament["players_list"])
+            id = tournament.doc_id
             load_tournament = Tournament(
                 name,
                 location,
@@ -88,6 +94,7 @@ class TournamentDAO(AbstractDAO):
                 players_list,
                 time_control,
                 description,
+                id,
             )
             if tournament["rounds"]:
                 rounds = self.deserialized_rounds(tournament["rounds"], load_tournament)

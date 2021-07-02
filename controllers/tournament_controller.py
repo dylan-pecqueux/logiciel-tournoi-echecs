@@ -12,16 +12,17 @@ class TournamentController:
         self.tournament_dao = tournament_dao
 
     def add_tournament(self):
-        info_tounament = self.tournament_view.prompt_info_tournament()
+        info_tournament = self.tournament_view.prompt_info_tournament()
         new_tournament = Tournament(
-            info_tounament[0],
-            info_tounament[1],
-            info_tounament[2],
-            info_tounament[3],
-            info_tounament[4],
-            info_tounament[5],
-            info_tounament[6],
-            info_tounament[7],
+            info_tournament[0],
+            info_tournament[1],
+            info_tournament[2],
+            info_tournament[3],
+            info_tournament[4],
+            info_tournament[5],
+            info_tournament[6],
+            info_tournament[7],
+            self.tournament_dao.give_id(),
         )
         self.tournament_dao.save(new_tournament)
         new_tournament.sort_players_by_classment()
