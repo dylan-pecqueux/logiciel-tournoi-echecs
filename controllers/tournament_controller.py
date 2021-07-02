@@ -6,13 +6,12 @@ from controllers.round_controller import RoundController
 
 
 class TournamentController:
-    def __init__(self, players, tournaments, tournament_dao):
+    def __init__(self, players, tournament_dao):
         self.tournament_view = TournamentView(players)
         self.tournaments_view = TournamentsView()
-        self.all_tournaments = tournaments.all_tournaments
         self.tournament_dao = tournament_dao
 
-    def add_tournament(self, tournaments):
+    def add_tournament(self):
         info_tounament = self.tournament_view.prompt_info_tournament()
         new_tournament = Tournament(
             info_tounament[0],
@@ -26,21 +25,22 @@ class TournamentController:
         )
         self.tournament_dao.save(new_tournament)
         new_tournament.sort_players_by_classment()
-        tournaments.add_tournament(new_tournament)
         self.tournament_view.display_tournament(new_tournament)
 
-    def view_all_tournaments(self, tournaments):
+    def view_all_tournaments(self):
         tournament_to_view = self.tournaments_view.display_all_tournaments(
-            tournaments.all_tournaments
+            self.tournament_dao.get_tournaments()
         )
         if tournament_to_view == "10":
             return
         else:
             start_tournament_or_not = self.tournament_view.display_tournament_info(
-                self.all_tournaments[int(tournament_to_view)]
+                self.tournament_dao.get_tournaments()[int(tournament_to_view)]
             )
             if start_tournament_or_not == "1":
-                self.start_tournament(self.all_tournaments[int(tournament_to_view)])
+                self.start_tournament(
+                    self.tournament_dao.get_tournaments()[int(tournament_to_view)]
+                )
 
     def start_tournament(self, tournament):
         """start tournament and run round 4 time

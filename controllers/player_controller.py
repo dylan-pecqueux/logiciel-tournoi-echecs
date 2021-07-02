@@ -21,7 +21,6 @@ class PlayerController:
         )
         self.player_dao.save(new_player)
         self.view.display_player(new_player)
-        self.player_dao.add_player(new_player)
 
     def add_another_player(self):
         return self.view.prompt_add_another_player() == "y"

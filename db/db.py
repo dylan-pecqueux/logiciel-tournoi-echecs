@@ -19,6 +19,10 @@ class DB:
         serialized_players = self.players_table.all()
         return serialized_players
 
+    def all_tournaments(self):
+        serialized_tournaments = self.tournaments_table.all()
+        return serialized_tournaments
+
     def add_player(self, player):
         self.players.append(player)
 

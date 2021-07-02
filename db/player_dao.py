@@ -6,6 +6,7 @@ class PlayerDAO(AbstractDAO):
     def save(self, player):
         serialized_player = self.serialized_player(player)
         self.db.save_player(serialized_player)
+        self.add_player(player)
 
     def give_id(self):
         lenght_players_table = self.db.lenght_players_table()
