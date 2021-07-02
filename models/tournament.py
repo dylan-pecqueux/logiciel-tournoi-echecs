@@ -9,7 +9,6 @@ class Tournament:
         players_list,
         time_control,
         description,
-        rounds=[],
     ):
         self.name = name
         self.location = location
@@ -19,7 +18,7 @@ class Tournament:
         self.players_list = players_list
         self.time_control = time_control
         self.description = description
-        self.rounds = rounds
+        self.rounds = []
 
     def sort_players_by_classment(self):
         self.players_list = sorted(

@@ -29,13 +29,15 @@ class RoundController:
     ):
         already_play = player.get_opponents(tournament)
         if players[index + check_player_after] not in already_play:
+            print("if")
             self.round.new_match(
                 player, players[index + check_player_after], tournament
             )
             players.remove(players[index + check_player_after])
             players.remove(player)
             return players
-        elif index + check_player_after == len(players) - 1:
+        elif index + check_player_after >= len(players) - 1:
+            print("elif")
             self.round.new_match(
                 player, players[index + check_player_after], tournament
             )
@@ -43,6 +45,7 @@ class RoundController:
             players.remove(player)
             return players
         else:
+            print("else")
             check_player_after += 1
             self.check_if_already_played(
                 index, player, players, tournament, check_player_after

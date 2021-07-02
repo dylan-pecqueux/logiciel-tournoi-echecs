@@ -2,8 +2,8 @@ from models.match import Match
 
 
 class Round:
-    def __init__(self, round_number=1, all_matchs=[]):
-        self.all_matchs = all_matchs
+    def __init__(self, round_number=1):
+        self.all_matchs = []
         self.round_number = round_number
 
     def new_match(self, player_1, player_2, tournament):

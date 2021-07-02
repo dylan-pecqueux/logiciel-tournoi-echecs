@@ -79,7 +79,6 @@ class TournamentDAO(AbstractDAO):
             time_control = tournament["time_control"]
             description = tournament["description"]
             players_list = self.get_players_of_tournament(tournament["players_list"])
-            rounds = self.deserialized_rounds(tournament["rounds"])
             load_tournament = Tournament(
                 name,
                 location,
@@ -89,17 +88,20 @@ class TournamentDAO(AbstractDAO):
                 players_list,
                 time_control,
                 description,
-                rounds,
             )
+            if tournament["rounds"]:
+                rounds = self.deserialized_rounds(tournament["rounds"], load_tournament)
+                load_tournament.rounds = rounds
             self.add_tournament(load_tournament)
 
-    def deserialized_rounds(self, rounds):
+    def deserialized_rounds(self, rounds, tournament):
         deserialized_rounds = []
         if rounds:
             for round in rounds:
                 round_number = round["round_number"]
-                all_matchs = self.deserialized_matches(round["all_matchs"])
-                load_round = Round(round_number, all_matchs)
+                load_round = Round(round_number)
+                all_matches = self.deserialized_matches(round["all_matchs"], tournament)
+                load_round.all_matchs = all_matches
                 deserialized_rounds.append(load_round)
             return deserialized_rounds
         else:
