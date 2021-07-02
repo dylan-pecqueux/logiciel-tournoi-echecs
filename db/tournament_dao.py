@@ -32,6 +32,8 @@ class TournamentDAO(AbstractDAO):
         serialized_rounds = []
         if rounds:
             for round in rounds:
+                print("ici")
+                print(round.all_matchs)
                 serialized_round = {
                     "all_matchs": self.serialized_matches(round.all_matchs),
                     "round_number": round.round_number,
@@ -133,6 +135,7 @@ class TournamentDAO(AbstractDAO):
                 second_player_score,
             )
             deserialized_matches.append(load_match)
+        return deserialized_matches
 
     def get_players_of_tournament(self, players_list):
         players = []
