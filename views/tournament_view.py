@@ -1,3 +1,9 @@
+from rich.console import Console
+from rich.table import Table
+
+console = Console()
+
+
 class TournamentView:
     def __init__(self, all_players):
         self.list_of_players = all_players
@@ -41,12 +47,51 @@ class TournamentView:
         return players
 
     def display_tournament(self, tournament):
-        print(tournament)
+        print("\033c")
+        console.print(tournament, style="bold magenta")
 
     def display_tournament_info(self, tournament):
-        print(tournament)
-        print("1 - Commencer le tournoi\n" "2 - Revenir au menu")
-        user_choice = input("Que voulez-vous faire ? : ")
+        print("\033c")
+        console.print(
+            f"[bold red] {tournament.name}[/bold red]\n\n [blue]À {tournament.location}, du {tournament.start_date} au {tournament.end_date}\n {tournament.number_of_turns} tours et {tournament.time_control} en controle du temps.\n\n Commentaire :\n[/blue] {tournament.description}"
+        )
+        console.print(
+            "\n1 - Commencer le tournoi"
+            "\n2 - Voir les joueurs du tournoi"
+            "\n0 - Revenir au menu",
+            style="bold magenta",
+        )
+        console.print("Que voulez-vous faire ? : ", style="bold red")
+        user_choice = input("=> ")
+        return user_choice
+
+    def display_all_players(self, players, order):
+        print("\033c")
+        console.print(
+            f"Liste de tous les joueurs du tournoi par {order}: \n", style="bold red"
+        )
+        table = Table(show_header=True, header_style="bold red")
+        table.add_column("Rank", style="dim")
+        table.add_column("Name", justify="right")
+        table.add_column("Gender", justify="right")
+        table.add_column("Date of birth", justify="right")
+        for player in players:
+            player = player[0]
+            table.add_row(
+                f"{player.classment}",
+                f"[magenta]{player.first_name} {player.last_name}[/magenta]",
+                player.sex,
+                player.date_of_birth,
+            )
+        console.print(table)
+        console.print(
+            "\n1 - Joueurs par classement (défaut) \n"
+            "2 - Joueurs par ordre alphabétique \n"
+            "0 - Revenir au tournoi \n",
+            style="bold magenta",
+        )
+        console.print("Que voulez-vous faire ?", style="bold red")
+        user_choice = input("=> ")
         return user_choice
 
     def display_tournament_end(self, classment):
