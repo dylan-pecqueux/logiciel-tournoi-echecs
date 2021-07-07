@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 class SerializeTournament:
     def serialized_tournament(self, tournament):
         serialized_tournament = {
@@ -20,8 +23,8 @@ class SerializeTournament:
                 serialized_round = {
                     "all_matchs": self.serialized_matches(round.all_matchs),
                     "round_number": round.round_number,
-                    "start_date": round.start_date,
-                    "end_date": round.end_date,
+                    "start_date": round.start_date.strftime("%d/%m/%Y, %H:%M:%S"),
+                    "end_date": round.end_date.strftime("%d/%m/%Y, %H:%M:%S"),
                 }
                 serialized_rounds.append(serialized_round)
             return serialized_rounds

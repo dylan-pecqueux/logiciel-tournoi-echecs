@@ -3,7 +3,7 @@ from models.match import Match
 
 
 class Round:
-    def __init__(self, round_number=1, start_date=datetime.now(), end_date=None):
+    def __init__(self, round_number, start_date, end_date=None):
         self.all_matchs = []
         self.round_number = round_number
         self.start_date = start_date

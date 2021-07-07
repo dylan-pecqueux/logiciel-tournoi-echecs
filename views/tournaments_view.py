@@ -55,5 +55,5 @@ class TournamentsView:
         console.print(
             "Tapez le numéro du tournoi que vous voulez voir : ", style="bold red"
         )
-        user_choice = input("=>")
+        user_choice = input("=> ")
         return int(user_choice) - 1

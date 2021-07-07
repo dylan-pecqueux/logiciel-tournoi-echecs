@@ -29,25 +29,38 @@ class TournamentController:
         self.tournament_view.display_tournament(new_tournament)
 
     def view_all_tournaments(self):
-        tournament_to_view = self.tournaments_view.display_all_tournaments(
+        index_tournament_to_view = self.tournaments_view.display_all_tournaments(
             self.tournament_dao.get_tournaments()
         )
-        if tournament_to_view == "0":
+        if index_tournament_to_view == "0":
             return
         else:
-            self.view_tournament(tournament_to_view)
+            tournament = self.tournament_dao.get_tournaments()[index_tournament_to_view]
+            self.view_tournament(tournament)
 
     def view_tournament(self, tournament):
-        start_tournament_or_not = self.tournament_view.display_tournament_info(
-            self.tournament_dao.get_tournaments()[tournament]
-        )
-        if start_tournament_or_not == "1":
-            self.start_tournament(self.tournament_dao.get_tournaments()[tournament])
-        elif start_tournament_or_not == "2":
-            self.view_players_from_tournament(
-                self.tournament_dao.get_tournaments()[tournament]
-            )
+        user_choice = self.tournament_view.display_tournament_info(tournament)
+        if len(tournament.rounds) < 4:
+            self.menu_begin_tournament(tournament, user_choice)
+        else:
+            self.menu_ended_tournament(tournament, user_choice)
+
+    def menu_begin_tournament(self, tournament, user_choice):
+        if user_choice == "1":
+            self.start_tournament(tournament)
+        elif user_choice == "2":
+            self.view_players_from_tournament(tournament)
             self.view_tournament(tournament)
+
+    def menu_ended_tournament(self, tournament, user_choice):
+        if user_choice == "1":
+            self.view_round_of_tournament(tournament)
+        elif user_choice == "2":
+            self.view_players_from_tournament(tournament)
+            self.view_tournament(tournament)
+
+    def view_round_of_tournament(self, tournament):
+        self.tournament_view.display_all_rounds(tournament)
 
     def view_players_from_tournament(self, tournament, user_choice="1"):
         if user_choice == "1":

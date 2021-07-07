@@ -1,10 +1,11 @@
+from datetime import datetime
 from models.round import Round
 from views.round_view import RoundView
 
 
 class RoundController:
     def __init__(self, round_number):
-        self.round = Round()
+        self.round = Round(round_number, datetime.now())
         self.round_view = RoundView()
         self.round_number = round_number
 

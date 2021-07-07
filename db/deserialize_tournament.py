@@ -1,3 +1,4 @@
+from datetime import datetime
 from models.tournament import Tournament
 from models.round import Round
 from models.match import Match
@@ -41,8 +42,10 @@ class DeserializeTournament:
         if rounds:
             for round in rounds:
                 round_number = round["round_number"]
-                start_date = round["start_date"]
-                end_date = round["end_date"]
+                start_date = datetime.strptime(
+                    round["start_date"], "%d/%m/%Y, %H:%M:%S"
+                )
+                end_date = datetime.strptime(round["end_date"], "%d/%m/%Y, %H:%M:%S")
                 load_round = Round(round_number, start_date, end_date)
                 all_matches = self.deserialized_matches(round["all_matchs"], tournament)
                 load_round.all_matchs = all_matches

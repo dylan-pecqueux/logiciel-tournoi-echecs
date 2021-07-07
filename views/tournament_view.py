@@ -55,13 +55,23 @@ class TournamentView:
         console.print(
             f"[bold red] {tournament.name}[/bold red]\n\n [blue]À {tournament.location}, du {tournament.start_date} au {tournament.end_date}\n {tournament.number_of_turns} tours et {tournament.time_control} en controle du temps.\n\n Commentaire :\n[/blue] {tournament.description}"
         )
-        console.print(
-            "\n1 - Commencer le tournoi"
-            "\n2 - Voir les joueurs du tournoi"
-            "\n0 - Revenir au menu",
-            style="bold magenta",
-        )
-        console.print("Que voulez-vous faire ? : ", style="bold red")
+        if len(tournament.rounds) >= 4:
+            console.print("\nTournoi achevé", style="bold red")
+            console.print(
+                "\n1 - Voir les rounds du tournoi"
+                "\n2 - Voir les joueurs du tournoi"
+                "\n0 - Revenir au menu",
+                style="bold magenta",
+            )
+        else:
+            console.print("\nTournoi non commencé", style="bold red")
+            console.print(
+                "\n1 - Commencer le tournoi"
+                "\n2 - Voir les joueurs du tournoi"
+                "\n0 - Revenir au menu",
+                style="bold magenta",
+            )
+        console.print("\nQue voulez-vous faire ? : ", style="bold red")
         user_choice = input("=> ")
         return user_choice
 
@@ -72,9 +82,9 @@ class TournamentView:
         )
         table = Table(show_header=True, header_style="bold red")
         table.add_column("Rank", style="dim")
-        table.add_column("Name", justify="right")
-        table.add_column("Gender", justify="right")
-        table.add_column("Date of birth", justify="right")
+        table.add_column("Nom", justify="right")
+        table.add_column("Genre", justify="right")
+        table.add_column("Date de naissance", justify="right")
         for player in players:
             player = player[0]
             table.add_row(
@@ -102,3 +112,28 @@ class TournamentView:
                 f"{player[0].first_name} {player[0].last_name}, classement : {player[0].classment}"
             )
             print(f"Score au tournoi : {player[1]}")
+
+    def display_all_rounds(self, tournament):
+        print("\033c")
+        console.print(
+            f"Liste de tous les rounds du tournoi {tournament.name}: \n",
+            style="bold red",
+        )
+        table = Table(show_header=True, header_style="bold red")
+        table.add_column("Nom", style="dim")
+        table.add_column("Début", justify="right")
+        table.add_column("Fin", justify="right")
+        for round in tournament.rounds:
+            table.add_row(
+                f"Round {round.round_number}",
+                f"{round.start_date}",
+                f"{round.end_date}",
+            )
+        console.print(table)
+        console.print(
+            "\n0 - Revenir au tournoi \n",
+            style="bold magenta",
+        )
+        console.print("Que voulez-vous faire ?", style="bold red")
+        user_choice = input("=> ")
+        return user_choice
