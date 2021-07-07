@@ -26,4 +26,10 @@ class PlayerController:
         return self.view.prompt_add_another_player() == "y"
 
     def view_all_players(self):
-        self.view.display_all_players(self.player_dao.get_players())
+        players_by_classment = self.sort_players_by_classment()
+        self.view.display_all_players(players_by_classment)
+
+    def sort_players_by_classment(self):
+        players = self.player_dao.get_players()
+        players_by_classment = sorted(players, key=lambda player: player.classment)
+        return players_by_classment

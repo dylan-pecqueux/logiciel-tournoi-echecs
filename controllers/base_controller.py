@@ -45,4 +45,5 @@ class BaseController:
 
     def run(self):
         """Run the programm"""
+        self.view.welcome()
         self.menu_choice()

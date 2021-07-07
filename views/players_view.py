@@ -1,8 +1,11 @@
+from rich.console import Console
+from rich.table import Table
 import re
+
+console = Console()
 
 
 class PlayersView:
-
     def prompt_for_player(self):
         info_player = []
 
@@ -20,9 +23,21 @@ class PlayersView:
         return info_player
 
     def display_all_players(self, players):
-        print("\n Liste de tous les joueurs : \n")
+        print("\033c")
+        console.print("Liste de tous les joueurs : \n", style="bold red")
+        table = Table(show_header=True, header_style="bold red")
+        table.add_column("Rank", style="dim")
+        table.add_column("Name", justify="right")
+        table.add_column("Gender", justify="right")
+        table.add_column("Date of birth", justify="right")
         for player in players:
-            print(f"{player}\n")
+            table.add_row(
+                f"{player.classment}",
+                f"[magenta]{player.first_name} {player.last_name}[/magenta]",
+                player.sex,
+                player.date_of_birth,
+            )
+        console.print(table)
 
     def general_input(self, message):
         user_input = input(message)
@@ -33,11 +48,12 @@ class PlayersView:
             return self.general_input(message)
 
     def input_date_of_birth(self):
-        date_of_birth = input(
-            "Entrez la date de naissance du joueur (jj/mm/aaaa): ")
+        date_of_birth = input("Entrez la date de naissance du joueur (jj/mm/aaaa): ")
         if date_of_birth:
             validation = re.match(
-                '^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$', date_of_birth)
+                "^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$",
+                date_of_birth,
+            )
             if validation:
                 return date_of_birth
             else:
@@ -55,7 +71,7 @@ class PlayersView:
 
     def input_classment(self):
         classment = input("Entrez le classement du joueur : ")
-        validation = re.match('^\d+$', classment)
+        validation = re.match("^\d+$", classment)
         if validation:
             return classment
         else:
