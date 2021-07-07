@@ -93,5 +93,6 @@ class RoundController:
         else:
             self.pair_generation(tournament)
         self.view_round()
+        self.round.add_end_date()
         self.input_score(tournament.players_list)
         self.sort_players(tournament)
