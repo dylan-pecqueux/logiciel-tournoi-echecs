@@ -22,9 +22,9 @@ class PlayersView:
 
         return info_player
 
-    def display_all_players(self, players):
+    def display_all_players(self, players, order):
         print("\033c")
-        console.print("Liste de tous les joueurs : \n", style="bold red")
+        console.print(f"Liste de tous les joueurs par {order}: \n", style="bold red")
         table = Table(show_header=True, header_style="bold red")
         table.add_column("Rank", style="dim")
         table.add_column("Name", justify="right")
@@ -38,6 +38,15 @@ class PlayersView:
                 player.date_of_birth,
             )
         console.print(table)
+        console.print(
+            "\n1 - Joueurs par classement (défaut) \n"
+            "2 - Joueurs par ordre alphabétique \n"
+            "0 - Revenir au menu \n",
+            style="bold magenta",
+        )
+        console.print("Que voulez-vous faire ?", style="bold red")
+        user_choice = input("=> ")
+        return user_choice
 
     def general_input(self, message):
         user_input = input(message)
