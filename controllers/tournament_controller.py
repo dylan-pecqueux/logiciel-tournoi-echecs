@@ -32,15 +32,15 @@ class TournamentController:
         tournament_to_view = self.tournaments_view.display_all_tournaments(
             self.tournament_dao.get_tournaments()
         )
-        if tournament_to_view == "10":
+        if tournament_to_view == "0":
             return
         else:
             start_tournament_or_not = self.tournament_view.display_tournament_info(
-                self.tournament_dao.get_tournaments()[int(tournament_to_view)]
+                self.tournament_dao.get_tournaments()[tournament_to_view]
             )
             if start_tournament_or_not == "1":
                 self.start_tournament(
-                    self.tournament_dao.get_tournaments()[int(tournament_to_view)]
+                    self.tournament_dao.get_tournaments()[tournament_to_view]
                 )
 
     def start_tournament(self, tournament):
