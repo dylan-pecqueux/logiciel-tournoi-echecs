@@ -5,11 +5,11 @@ class Tournament:
         location,
         start_date,
         end_date,
-        number_of_turns,
         players_list,
         time_control,
         description,
         id,
+        number_of_turns=4,
     ):
         self.name = name
         self.location = location

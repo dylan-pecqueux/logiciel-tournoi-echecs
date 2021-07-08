@@ -2,6 +2,7 @@ from models.tournament import Tournament
 from models.round import Round
 from views.tournament_view import TournamentView
 from views.tournaments_view import TournamentsView
+from views.new_tournament_view import NewTournamentView
 from controllers.round_controller import RoundController
 
 
@@ -9,6 +10,7 @@ class TournamentController:
     def __init__(self, players, tournament_dao):
         self.tournament_view = TournamentView(players)
         self.tournaments_view = TournamentsView()
+        self.new_tournament_view = NewTournamentView()
         self.tournament_dao = tournament_dao
 
     def add_tournament(self):
@@ -21,7 +23,6 @@ class TournamentController:
             info_tournament[4],
             info_tournament[5],
             info_tournament[6],
-            info_tournament[7],
             self.tournament_dao.give_id(),
         )
         self.tournament_dao.save(new_tournament)
