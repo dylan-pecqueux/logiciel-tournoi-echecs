@@ -94,13 +94,27 @@ class TournamentView:
         return user_choice
 
     def display_tournament_end(self, classment):
-        print("Tous les rounds ont étaient joués, le tournoi est terminé")
-        print("Voici le classement final : ")
+        print("\033c")
+        console.print(
+            "Tous les rounds ont étaient joués, le tournoi est terminé",
+            style="bold red",
+        )
+        console.print("\nVoici le classement final : \n", style="bold magenta")
+        table = Table(show_header=True, header_style="bold red")
+        table.add_column("Score", style="dim")
+        table.add_column("Nom", justify="right")
+        table.add_column("Genre", justify="right")
+        table.add_column("Classement", justify="right")
         for player in classment:
-            print(
-                f"{player[0].first_name} {player[0].last_name}, classement : {player[0].classment}"
+            table.add_row(
+                f"{player[1]}",
+                f"[magenta]{player[0].first_name} {player[0].last_name}[/magenta]",
+                player[0].sex,
+                f"{player[0].classment}",
             )
-            print(f"Score au tournoi : {player[1]}")
+        console.print(table)
+        console.print("\nAppuyez sur entrée pour continuer", style="bold red")
+        input("=> ")
 
     def display_all_rounds(self, tournament):
         print("\033c")

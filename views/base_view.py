@@ -26,8 +26,10 @@ class BaseView:
         )
 
     def prompt_for_choice(self):
+        print("\033c")
+        self.welcome()
         console.print(
-            "1 - Ajouter un joueur\n"
+            "\n1 - Ajouter un joueur\n"
             "2 - Voir tous les joueurs\n"
             "3 - Créer un tournoi\n"
             "4 - Voir tous les tournois\n"

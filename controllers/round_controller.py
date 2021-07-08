@@ -52,7 +52,7 @@ class RoundController:
     def view_round(self):
         end_of_round = None
         while end_of_round != "y":
-            end_of_round = self.round_view.display_all_matchs(self.round.all_matchs)
+            end_of_round = self.round_view.display_all_matchs(self.round)
 
     def find_player(self, winner_player, all_players, score):
         """Add new score in tournament players list"""
