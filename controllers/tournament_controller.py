@@ -55,12 +55,22 @@ class TournamentController:
     def menu_ended_tournament(self, tournament, user_choice):
         if user_choice == "1":
             self.view_round_of_tournament(tournament)
+            self.view_tournament(tournament)
         elif user_choice == "2":
             self.view_players_from_tournament(tournament)
             self.view_tournament(tournament)
 
     def view_round_of_tournament(self, tournament):
-        self.tournament_view.display_all_rounds(tournament)
+        user_choice = self.tournament_view.display_all_rounds(tournament)
+        try:
+            selected_round = tournament.rounds[int(user_choice) - 1]
+        except:
+            selected_round = None
+        if selected_round:
+            self.view_info_round(selected_round)
+
+    def view_info_round(self, round):
+        self.tournament_view.display_info_round(round)
 
     def view_players_from_tournament(self, tournament, user_choice="1"):
         if user_choice == "1":

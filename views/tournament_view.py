@@ -56,7 +56,7 @@ class TournamentView:
             f"[bold red] {tournament.name}[/bold red]\n\n [blue]À {tournament.location}, du {tournament.start_date} au {tournament.end_date}\n {tournament.number_of_turns} tours et {tournament.time_control} en controle du temps.\n\n Commentaire :\n[/blue] {tournament.description}"
         )
         if len(tournament.rounds) >= 4:
-            console.print("\nTournoi achevé", style="bold red")
+            console.print("\nTournoi terminé", style="bold red")
             console.print(
                 "\n1 - Voir les rounds du tournoi"
                 "\n2 - Voir les joueurs du tournoi"
@@ -98,6 +98,37 @@ class TournamentView:
             "\n1 - Joueurs par classement (défaut) \n"
             "2 - Joueurs par ordre alphabétique \n"
             "0 - Revenir au tournoi \n",
+            style="bold magenta",
+        )
+        console.print("Que voulez-vous faire ?", style="bold red")
+        user_choice = input("=> ")
+        return user_choice
+
+    def display_info_round(self, round):
+        print("\033c")
+        console.print(
+            f"Liste de tous les match du round {round.round_number}: \n",
+            style="bold red",
+        )
+        table = Table(show_header=True, header_style="bold red")
+        table.add_column("Match", style="dim")
+        table.add_column("Joueurs", justify="right")
+        table.add_column("Vainqueur", justify="right")
+        for index, match in enumerate(round.all_matchs):
+            if match.first_player[1] == 1:
+                winner = f"{match.first_player[0].first_name} {match.first_player[0].last_name}"
+            elif match.first_player[1] == 0.5:
+                winner = "égalité"
+            else:
+                winner = f"{match.second_player[0].first_name} {match.second_player[0].last_name}"
+            table.add_row(
+                f"{index + 1}",
+                f"{match.first_player[0].first_name} {match.first_player[0].last_name} contre {match.second_player[0].first_name} {match.second_player[0].last_name}",
+                winner,
+            )
+        console.print(table)
+        console.print(
+            "\n0 - Revenir au tournoi \n",
             style="bold magenta",
         )
         console.print("Que voulez-vous faire ?", style="bold red")
