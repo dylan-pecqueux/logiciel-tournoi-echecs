@@ -8,10 +8,6 @@ class TournamentView:
     def __init__(self, all_players):
         self.list_of_players = all_players
 
-    def display_tournament(self, tournament):
-        print("\033c")
-        console.print(tournament, style="bold magenta")
-
     def display_tournament_info(self, tournament):
         print("\033c")
         console.print(

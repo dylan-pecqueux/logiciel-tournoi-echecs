@@ -10,11 +10,11 @@ class TournamentController:
     def __init__(self, players, tournament_dao):
         self.tournament_view = TournamentView(players)
         self.tournaments_view = TournamentsView()
-        self.new_tournament_view = NewTournamentView()
+        self.new_tournament_view = NewTournamentView(players)
         self.tournament_dao = tournament_dao
 
     def add_tournament(self):
-        info_tournament = self.tournament_view.prompt_info_tournament()
+        info_tournament = self.new_tournament_view.prompt_info_tournament()
         new_tournament = Tournament(
             info_tournament[0],
             info_tournament[1],
@@ -27,7 +27,8 @@ class TournamentController:
         )
         self.tournament_dao.save(new_tournament)
         new_tournament.sort_players_by_classment()
-        self.tournament_view.display_tournament(new_tournament)
+        self.new_tournament_view.display_tournament_added()
+        self.view_tournament(new_tournament)
 
     def view_all_tournaments(self):
         index_tournament_to_view = self.tournaments_view.display_all_tournaments(

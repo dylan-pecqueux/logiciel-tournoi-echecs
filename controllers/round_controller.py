@@ -20,34 +20,34 @@ class RoundController:
 
     def pair_generation(self, tournament):
         players = []
+
+        def check_if_already_played(index, check_player_after=1):
+            already_play = players[index].get_opponents(tournament)
+            if index + check_player_after >= len(players) - 1:
+                self.round.new_match(
+                    players[0], players[index + check_player_after], tournament
+                )
+                players.remove(players[index + check_player_after])
+                players.remove(players[0])
+                return players
+            elif players[index + check_player_after] not in already_play:
+                self.round.new_match(
+                    players[0], players[index + check_player_after], tournament
+                )
+                players.remove(players[index + check_player_after])
+                players.remove(players[0])
+                return players
+            else:
+                check_player_after += 1
+                check_if_already_played(index, check_player_after)
+
         for player in tournament.players_list:
             players.append(player[0])
-        for index, player in enumerate(players):
-            players = self.check_if_already_played(index, player, players, tournament)
-
-    def check_if_already_played(
-        self, index, player, players, tournament, check_player_after=1
-    ):
-        already_play = player.get_opponents(tournament)
-        if players[index + check_player_after] not in already_play:
-            self.round.new_match(
-                player, players[index + check_player_after], tournament
-            )
-            players.remove(players[index + check_player_after])
-            players.remove(player)
-            return players
-        elif index + check_player_after >= len(players) - 1:
-            self.round.new_match(
-                player, players[index + check_player_after], tournament
-            )
-            players.remove(players[index + check_player_after])
-            players.remove(player)
-            return players
-        else:
-            check_player_after += 1
-            self.check_if_already_played(
-                index, player, players, tournament, check_player_after
-            )
+        print(len(players))
+        for i in range(len(players) // 2):
+            print(players)
+            print("ça passe")
+            check_if_already_played(0)
 
     def view_round(self):
         end_of_round = None

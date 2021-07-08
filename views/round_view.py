@@ -1,3 +1,7 @@
+from rich.console import Console
+from rich.table import Table
+
+
 class RoundView:
     def display_all_matchs(self, matchs):
         for index, match in enumerate(matchs):

@@ -15,7 +15,6 @@ class DeserializeTournament:
             location = tournament["location"]
             start_date = tournament["start_date"]
             end_date = tournament["end_date"]
-            number_of_turns = tournament["number_of_turns"]
             time_control = tournament["time_control"]
             description = tournament["description"]
             players_list = self.get_players_of_tournament(tournament["players_list"])
@@ -25,7 +24,6 @@ class DeserializeTournament:
                 location,
                 start_date,
                 end_date,
-                number_of_turns,
                 players_list,
                 time_control,
                 description,

@@ -1,9 +1,13 @@
 from rich.console import Console
+from rich.table import Table
 
 console = Console()
 
 
 class NewTournamentView:
+    def __init__(self, all_players):
+        self.list_of_players = all_players
+
     def prompt_info_tournament(self):
         info_tounament = []
         print("\033c")
@@ -47,9 +51,22 @@ class NewTournamentView:
                 console.print(
                     "Selectionnez les joueurs du tournoi : ", style="bold magenta"
                 )
+                table = Table(show_header=True, header_style="bold red")
+                table.add_column("Numero", style="dim")
+                table.add_column("Rank", justify="right")
+                table.add_column("Nom", justify="right")
+                table.add_column("Genre", justify="right")
+                table.add_column("Date de naissance", justify="right")
                 for index, player in enumerate(self.list_of_players):
                     if [player, 0] not in players:
-                        print(index, player)
+                        table.add_row(
+                            f"{index}",
+                            f"{player.classment}",
+                            f"[magenta]{player.first_name} {player.last_name}[/magenta]",
+                            player.sex,
+                            player.date_of_birth,
+                        )
+                console.print(table)
                 console.print(
                     "\nEntrez le numero correspondant au joueur que vous voulez ajouter : ",
                     style="bold red",
@@ -64,4 +81,12 @@ class NewTournamentView:
             if add_player_again == "y":
                 selection_player()
 
+        selection_player()
         return players
+
+    def display_tournament_added(self):
+        console.print("\nTournoi bien ajouté", style="bold red")
+        console.print(
+            "\nAppuyer sur entrée pour voir le tournoi ajouté", style="bold red"
+        )
+        input("=> ")
