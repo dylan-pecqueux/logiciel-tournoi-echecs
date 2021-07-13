@@ -21,18 +21,13 @@ class NewTournamentView:
         info_tounament.append(start_date)
         end_date = self.input_end_date(start_date)
         info_tounament.append(end_date)
-        print("\033c")
         players = self.add_player_to_tournament()
         info_tounament.append(players)
         print("\033c")
-        console.print("Entrez le mode de controle du temps : ", style="bold magenta")
-        time_control = input("=> ")
+        time_control = self.input_time_control()
         info_tounament.append(time_control)
-        print("\033c")
-        console.print("Entrez les remarques générales : ", style="bold magenta")
-        description = input("=> ")
+        description = self.general_input("Entrez les remarques générales : ")
         info_tounament.append(description)
-        print("\033c")
 
         return info_tounament
 
@@ -127,3 +122,28 @@ class NewTournamentView:
         except:
             console.print("\nFormat invalide\n", style="bold red")
             self.input_end_date(start_date)
+
+    def input_time_control(self):
+        console.print(
+            "Choisissez le mode de controle du temps : \n"
+            "\n1 - Bullet"
+            "\n2 - Blitz"
+            "\n3 - Coup rapide",
+            style="bold magenta",
+        )
+        user_input = input("=> ")
+        if user_input == "1":
+            print("\033c")
+            return "Bullet"
+        elif user_input == "2":
+            print("\033c")
+            return "Blitz"
+        elif user_input == "3":
+            print("\033c")
+            return "Coup rapide"
+        else:
+            console.print(
+                "\nVeuillez rentrer un numéro correspondant aux choix presentés\n",
+                style="bold red",
+            )
+            return self.input_time_control()
