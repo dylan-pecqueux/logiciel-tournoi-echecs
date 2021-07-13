@@ -80,3 +80,19 @@ class Components:
                 f"[bold red]{match.first_player[0].first_name} {match.first_player[0].last_name}[/bold red] contre [bold red]{match.second_player[0].first_name} {match.second_player[0].last_name}[/bold red]",
             )
         self.console.print(table)
+
+    def tournaments_table(self, tournaments):
+        table = Table(show_header=True, header_style="bold magenta")
+        table.add_column("Numero", style="dim")
+        table.add_column("Nom")
+        table.add_column("Lieu", justify="right")
+        table.add_column("Date", justify="right")
+        for tournament in tournaments:
+            index = tournaments.index(tournament)
+            table.add_row(
+                f"{index + 1}",
+                tournament.name,
+                tournament.location,
+                f"Du {tournament.start_date} au {tournament.end_date}",
+            )
+        self.console.print(table)

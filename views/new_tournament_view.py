@@ -2,17 +2,16 @@ from datetime import datetime
 from rich.console import Console
 from rich.table import Table
 
-console = Console()
-
 
 class NewTournamentView:
     def __init__(self, all_players):
         self.list_of_players = all_players
+        self.console = Console()
 
     def prompt_info_tournament(self):
         info_tounament = []
         print("\033c")
-        console.print("Création de tournoi", style="bold red\n")
+        self.console.print("Création de tournoi", style="bold red\n")
         name = self.general_input("Entrez le nom du tournoi : ")
         info_tounament.append(name)
         location = self.general_input("Entrez le lieu du tournoi : ")
@@ -37,7 +36,7 @@ class NewTournamentView:
         def selection_player():
             for i in range(2):
                 print("\033c")
-                console.print(
+                self.console.print(
                     "Selectionnez les joueurs du tournoi : ", style="bold magenta"
                 )
                 table = Table(show_header=True, header_style="bold red")
@@ -55,15 +54,15 @@ class NewTournamentView:
                             player.sex,
                             player.date_of_birth,
                         )
-                console.print(table)
-                console.print(
+                self.console.print(table)
+                self.console.print(
                     "\nEntrez le numero correspondant au joueur que vous voulez ajouter : ",
                     style="bold red",
                 )
                 player_to_add = input("=> ")
                 player_selection = self.list_of_players[int(player_to_add)]
                 players.append([player_selection, 0])
-            console.print(
+            self.console.print(
                 "\nVoulez-vous ajouter encore des joueurs ? (y/n)", style="bold red"
             )
             add_player_again = input("=> ")
@@ -74,24 +73,24 @@ class NewTournamentView:
         return players
 
     def display_tournament_added(self):
-        console.print("\nTournoi bien ajouté", style="bold red")
-        console.print(
+        self.console.print("\nTournoi bien ajouté", style="bold red")
+        self.console.print(
             "\nAppuyer sur entrée pour voir le tournoi ajouté", style="bold red"
         )
         input("=> ")
 
     def general_input(self, message):
-        console.print(f"\n{message}", style="bold magenta")
+        self.console.print(f"\n{message}", style="bold magenta")
         user_input = input("=> ")
         if user_input:
             print("\033c")
             return user_input
         else:
-            console.print("Champs obligatoire : ", style="bold red")
+            self.console.print("Champs obligatoire : ", style="bold red")
             return self.general_input(message)
 
     def input_start_date(self):
-        console.print("Entrez la date de début : ", style="bold magenta")
+        self.console.print("Entrez la date de début : ", style="bold magenta")
         user_input = input("=> ")
         try:
             date = datetime.strptime(user_input, "%d/%m/%Y")
@@ -99,14 +98,16 @@ class NewTournamentView:
                 print("\033c")
                 return date
             else:
-                console.print("\nVeuillez entrer une date future\n", style="bold red")
+                self.console.print(
+                    "\nVeuillez entrer une date future\n", style="bold red"
+                )
                 return self.input_start_date()
         except:
-            console.print("\nFormat invalide\n", style="bold red")
+            self.console.print("\nFormat invalide\n", style="bold red")
             self.input_start_date()
 
     def input_end_date(self, start_date):
-        console.print("Entrez la date de fin : ", style="bold magenta")
+        self.console.print("Entrez la date de fin : ", style="bold magenta")
         user_input = input("=> ")
         try:
             date = datetime.strptime(user_input, "%d/%m/%Y")
@@ -114,17 +115,17 @@ class NewTournamentView:
                 print("\033c")
                 return date
             else:
-                console.print(
+                self.console.print(
                     "\nVeuillez entrer une date supérieur ou égal à la date de début du tournoi\n",
                     style="bold red",
                 )
                 return self.input_end_date(start_date)
         except:
-            console.print("\nFormat invalide\n", style="bold red")
+            self.console.print("\nFormat invalide\n", style="bold red")
             self.input_end_date(start_date)
 
     def input_time_control(self):
-        console.print(
+        self.console.print(
             "Choisissez le mode de controle du temps : \n"
             "\n1 - Bullet"
             "\n2 - Blitz"
@@ -142,7 +143,7 @@ class NewTournamentView:
             print("\033c")
             return "Coup rapide"
         else:
-            console.print(
+            self.console.print(
                 "\nVeuillez rentrer un numéro correspondant aux choix presentés\n",
                 style="bold red",
             )
