@@ -1,5 +1,4 @@
 from rich.console import Console
-from rich.table import Table
 from views.components import Components
 
 

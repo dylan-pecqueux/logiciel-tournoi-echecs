@@ -68,3 +68,15 @@ class Components:
                 winner,
             )
         self.console.print(table)
+
+    def matches_table(self, matches):
+        table = Table(show_header=True, header_style="bold red")
+        table.add_column("Numero", style="dim")
+        table.add_column("Match", justify="right")
+        for index, match in enumerate(matches):
+            (match,) = match
+            table.add_row(
+                f"{index + 1}",
+                f"[bold red]{match.first_player[0].first_name} {match.first_player[0].last_name}[/bold red] contre [bold red]{match.second_player[0].first_name} {match.second_player[0].last_name}[/bold red]",
+            )
+        self.console.print(table)
