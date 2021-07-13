@@ -1,3 +1,4 @@
+from datetime import datetime
 from rich.console import Console
 from rich.table import Table
 
@@ -17,7 +18,7 @@ class NewTournamentView:
         location = self.general_input("Entrez le lieu du tournoi : ")
         info_tounament.append(location)
 
-        start_date = input("=> ")
+        start_date = self.input_start_date()
         info_tounament.append(start_date)
         print("\033c")
         console.print("Entrez la date de fin : ", style="bold magenta")
@@ -99,4 +100,15 @@ class NewTournamentView:
 
     def input_start_date(self):
         console.print("Entrez la date de début : ", style="bold magenta")
-        user_input = "=> "
+        user_input = input("=> ")
+        try:
+            date = datetime.strptime(user_input, "%d/%m/%Y")
+            if date > date.now():
+                print("\033c")
+                return date
+            else:
+                console.print("\nVeuillez entrer une date future\n", style="bold red")
+                return self.input_start_date()
+        except:
+            console.print("\nFormat invalide\n", style="bold red")
+            self.input_start_date()
