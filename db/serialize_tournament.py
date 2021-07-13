@@ -6,8 +6,8 @@ class SerializeTournament:
         serialized_tournament = {
             "name": tournament.name,
             "location": tournament.location,
-            "start_date": tournament.start_date,
-            "end_date": tournament.end_date,
+            "start_date": tournament.start_date.strftime("%d/%m/%Y"),
+            "end_date": tournament.end_date.strftime("%d/%m/%Y"),
             "number_of_turns": tournament.number_of_turns,
             "players_list": self.get_players_id(tournament.players_list),
             "time_control": tournament.time_control,

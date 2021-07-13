@@ -13,8 +13,8 @@ class DeserializeTournament:
         for tournament in tournaments:
             name = tournament["name"]
             location = tournament["location"]
-            start_date = tournament["start_date"]
-            end_date = tournament["end_date"]
+            start_date = datetime.strptime(tournament["start_date"], "%d/%m/%Y")
+            end_date = datetime.strptime(tournament["end_date"], "%d/%m/%Y")
             time_control = tournament["time_control"]
             description = tournament["description"]
             players_list = self.get_players_of_tournament(tournament["players_list"])
