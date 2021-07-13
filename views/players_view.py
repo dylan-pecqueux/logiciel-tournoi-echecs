@@ -8,7 +8,8 @@ console = Console()
 class PlayersView:
     def prompt_for_player(self):
         info_player = []
-
+        print("\033c")
+        console.print("Ajouter un joueur", style="bold red\n")
         last_name = self.general_input("Entrez le nom de famille du joueur : ")
         info_player.append(last_name)
         first_name = self.general_input("Entrez le prénom du joueur : ")
@@ -49,49 +50,69 @@ class PlayersView:
         return user_choice
 
     def general_input(self, message):
-        user_input = input(message)
+        console.print(f"\n{message}", style="bold magenta")
+        user_input = input("=> ")
         if user_input:
+            print("\033c")
             return user_input
         else:
-            print("Champs obligatoire :")
+            console.print("Champs obligatoire : ", style="bold red")
             return self.general_input(message)
 
     def input_date_of_birth(self):
-        date_of_birth = input("Entrez la date de naissance du joueur (jj/mm/aaaa): ")
+        console.print(
+            "\nEntrez la date de naissance du joueur (jj/mm/aaaa): ",
+            style="bold magenta",
+        )
+        date_of_birth = input("=> ")
         if date_of_birth:
             validation = re.match(
                 "^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$",
                 date_of_birth,
             )
             if validation:
+                print("\033c")
                 return date_of_birth
             else:
-                print("Format de la date de naissance incorrect")
+                console.print(
+                    "Format de la date de naissance incorrect", style="bold red"
+                )
                 return self.input_date_of_birth()
         else:
             return self.input_date_of_birth()
 
     def input_sex(self):
-        sex = input("Entrez le sexe du joueur (m ou f): ")
+        console.print(
+            "\nEntrez le sexe du joueur (m ou f): ",
+            style="bold magenta",
+        )
+        sex = input("=> ")
         if sex == "m" or sex == "f":
+            print("\033c")
             return sex
         else:
             return self.input_sex()
 
     def input_classment(self):
-        classment = input("Entrez le classement du joueur : ")
+        console.print(
+            "\nEntrez le classement du joueur : ",
+            style="bold magenta",
+        )
+        classment = input("=> ")
         validation = re.match("^\d+$", classment)
         if validation:
+            print("\033c")
             return classment
         else:
-            print("Veuillez entrer un nombre positif")
+            console.print("Veuillez entrer un nombre positif", style="bold red")
             return self.input_classment()
 
     def display_player(self, player):
+        console.print("Nouveau joueur ajouté :", style="bold red")
         print(player)
 
     def prompt_add_another_player(self):
         print()
-        print("Voulez-vous ajouter un autre joueur ?")
-        choice = input("y/n ? ")
+        console.print("Voulez-vous ajouter un autre joueur ? (y/n)", style="bold red")
+        choice = input("=> ")
         return choice
