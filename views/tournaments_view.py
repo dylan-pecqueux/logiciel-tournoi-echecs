@@ -20,36 +20,10 @@ class TournamentsView:
                 past_tournaments.append(tournament)
         console.print("Tournois passés :", style="bold red")
         if past_tournaments:
-            table = Table(show_header=True, header_style="bold magenta")
-            table.add_column("Numero", style="dim")
-            table.add_column("Nom")
-            table.add_column("Lieu", justify="right")
-            table.add_column("Date", justify="right")
-            for tournament in past_tournaments:
-                index = tournaments.index(tournament)
-                table.add_row(
-                    f"{index + 1}",
-                    tournament.name,
-                    tournament.location,
-                    f"Du {tournament.start_date} au {tournament.end_date}",
-                )
-            console.print(table)
+            self.create_table(past_tournaments)
         console.print("\nTournois futurs :", style="bold red")
         if future_tournaments:
-            table = Table(show_header=True, header_style="bold magenta")
-            table.add_column("Numero", style="dim")
-            table.add_column("Nom")
-            table.add_column("Lieu", justify="right")
-            table.add_column("Date", justify="right")
-            for tournament in future_tournaments:
-                index = tournaments.index(tournament)
-                table.add_row(
-                    f"{index + 1}",
-                    tournament.name,
-                    tournament.location,
-                    f"Du {tournament.start_date} au {tournament.end_date}",
-                )
-            console.print(table)
+            self.create_table(future_tournaments)
 
         console.print("\n0 - Revenir au menu\n", style="bold magenta")
         console.print(
@@ -57,3 +31,19 @@ class TournamentsView:
         )
         user_choice = input("=> ")
         return int(user_choice) - 1
+
+    def create_table(self, tournaments):
+        table = Table(show_header=True, header_style="bold magenta")
+        table.add_column("Numero", style="dim")
+        table.add_column("Nom")
+        table.add_column("Lieu", justify="right")
+        table.add_column("Date", justify="right")
+        for tournament in tournaments:
+            index = tournaments.index(tournament)
+            table.add_row(
+                f"{index + 1}",
+                tournament.name,
+                tournament.location,
+                f"Du {tournament.start_date} au {tournament.end_date}",
+            )
+        console.print(table)

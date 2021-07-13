@@ -12,15 +12,11 @@ class NewTournamentView:
         info_tounament = []
         print("\033c")
         console.print("Création de tournoi", style="bold red\n")
-        console.print("\nEntrez le nom du tournoi : ", style="bold magenta")
-        name = input("=> ")
+        name = self.general_input("Entrez le nom du tournoi : ")
         info_tounament.append(name)
-        print("\033c")
-        console.print("Entrez le lieu du tournoi : ", style="bold magenta")
-        location = input("=> ")
+        location = self.general_input("Entrez le lieu du tournoi : ")
         info_tounament.append(location)
-        print("\033c")
-        console.print("Entrez la date de début : ", style="bold magenta")
+
         start_date = input("=> ")
         info_tounament.append(start_date)
         print("\033c")
@@ -90,3 +86,17 @@ class NewTournamentView:
             "\nAppuyer sur entrée pour voir le tournoi ajouté", style="bold red"
         )
         input("=> ")
+
+    def general_input(self, message):
+        console.print(f"\n{message}", style="bold magenta")
+        user_input = input("=> ")
+        if user_input:
+            print("\033c")
+            return user_input
+        else:
+            console.print("Champs obligatoire : ", style="bold red")
+            return self.general_input(message)
+
+    def input_start_date(self):
+        console.print("Entrez la date de début : ", style="bold magenta")
+        user_input = "=> "
