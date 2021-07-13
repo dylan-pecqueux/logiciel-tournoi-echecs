@@ -17,12 +17,9 @@ class NewTournamentView:
         info_tounament.append(name)
         location = self.general_input("Entrez le lieu du tournoi : ")
         info_tounament.append(location)
-
         start_date = self.input_start_date()
         info_tounament.append(start_date)
-        print("\033c")
-        console.print("Entrez la date de fin : ", style="bold magenta")
-        end_date = input("=> ")
+        end_date = self.input_end_date(start_date)
         info_tounament.append(end_date)
         print("\033c")
         players = self.add_player_to_tournament()
@@ -112,3 +109,21 @@ class NewTournamentView:
         except:
             console.print("\nFormat invalide\n", style="bold red")
             self.input_start_date()
+
+    def input_end_date(self, start_date):
+        console.print("Entrez la date de fin : ", style="bold magenta")
+        user_input = input("=> ")
+        try:
+            date = datetime.strptime(user_input, "%d/%m/%Y")
+            if date >= start_date:
+                print("\033c")
+                return date
+            else:
+                console.print(
+                    "\nVeuillez entrer une date supérieur ou égal à la date de début du tournoi\n",
+                    style="bold red",
+                )
+                return self.input_end_date(start_date)
+        except:
+            console.print("\nFormat invalide\n", style="bold red")
+            self.input_end_date(start_date)
