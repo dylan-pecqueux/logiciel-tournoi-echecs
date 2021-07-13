@@ -1,12 +1,12 @@
 from rich.console import Console
-from views.players_view import PlayersView
-
-console = Console()
 
 
 class BaseView:
+    def __init__(self):
+        self.console = Console()
+
     def welcome(self):
-        console.print(
+        self.console.print(
             "_________ .__                     __   \n"
             "\_   ___ \|  |__   ____   _______/  |_ \n"
             "/    \  \/|  |  \_/ __ \ /  ___/\   __\ \n"
@@ -15,7 +15,7 @@ class BaseView:
             "        \/     \/     \/     \/        \n",
             style="bold red",
         )
-        console.print(
+        self.console.print(
             "___________                                                      __   \n"
             "\__    ___/___  __ _________  ____ _____    _____   ____   _____/  |_ \n"
             "  |    | /  _ \|  |  \_  __ \/    \\__  \  /     \_/ __ \ /    \   __\ \n"
@@ -28,7 +28,7 @@ class BaseView:
     def prompt_for_choice(self):
         print("\033c")
         self.welcome()
-        console.print(
+        self.console.print(
             "\n1 - Ajouter un joueur\n"
             "2 - Voir tous les joueurs\n"
             "3 - Créer un tournoi\n"
@@ -36,6 +36,6 @@ class BaseView:
             "0 - Quitter\n ",
             style="bold magenta",
         )
-        console.print("Que voulez vous faire ? : ", style="bold red")
+        self.console.print("Que voulez vous faire ? : ", style="bold red")
         choice = input("")
         return choice
