@@ -19,6 +19,7 @@ class RoundView:
         table.add_column("Numero", style="dim")
         table.add_column("Match", justify="right")
         for index, match in enumerate(round.all_matchs):
+            (match,) = match
             table.add_row(
                 f"{index + 1}",
                 f"{match.first_player[0].first_name} {match.first_player[0].last_name} contre {match.second_player[0].first_name} {match.second_player[0].last_name}",

@@ -66,7 +66,7 @@ class DeserializeTournament:
                 first_player_score,
                 second_player_score,
             )
-            deserialized_matches.append(load_match)
+            deserialized_matches.append((load_match,))
         return deserialized_matches
 
     def get_players_of_tournament(self, players_list):

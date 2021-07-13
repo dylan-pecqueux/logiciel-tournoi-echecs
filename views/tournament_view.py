@@ -73,6 +73,7 @@ class TournamentView:
         table.add_column("Joueurs", justify="right")
         table.add_column("Vainqueur", justify="right")
         for index, match in enumerate(round.all_matchs):
+            (match,) = match
             if match.first_player[1] == 1:
                 winner = f"{match.first_player[0].first_name} {match.first_player[0].last_name}"
             elif match.first_player[1] == 0.5:

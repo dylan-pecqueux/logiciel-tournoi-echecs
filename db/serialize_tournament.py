@@ -21,7 +21,7 @@ class SerializeTournament:
         if rounds:
             for round in rounds:
                 serialized_round = {
-                    "all_matchs": self.serialized_matches(round.all_matchs),
+                    "all_matchs": self.serialized_matches(round.all_matchs[0]),
                     "round_number": round.round_number,
                     "start_date": round.start_date.strftime("%d/%m/%Y, %H:%M:%S"),
                     "end_date": round.end_date.strftime("%d/%m/%Y, %H:%M:%S"),

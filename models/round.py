@@ -11,7 +11,7 @@ class Round:
 
     def new_match(self, player_1, player_2, tournament):
         new_match = Match(player_1, player_2, tournament)
-        self.all_matchs.append(new_match)
+        self.all_matchs.append((new_match,))
 
     def add_end_date(self):
         self.end_date = datetime.now()

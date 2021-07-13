@@ -63,7 +63,7 @@ class RoundController:
 
     def input_score(self, all_players):
         for match in self.round.all_matchs:
-            self.add_score(match, all_players)
+            self.add_score(match[0], all_players)
 
     def add_score(self, match, all_players):
         winner = self.round_view.input_score(match)

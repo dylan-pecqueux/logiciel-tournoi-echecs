@@ -8,13 +8,11 @@ console = Console()
 class TournamentsView:
     def display_all_tournaments(self, tournaments):
         print("\033c")
-        now = datetime.datetime.now().date()
+        now = datetime.datetime.now()
         past_tournaments = []
         future_tournaments = []
         for tournament in tournaments:
-            end_date = tournament.end_date.split("/")
-            date = datetime.date(int(end_date[2]), int(end_date[1]), int(end_date[0]))
-            if date > now:
+            if tournament.end_date > now:
                 future_tournaments.append(tournament)
             else:
                 past_tournaments.append(tournament)
