@@ -21,7 +21,7 @@ class SerializeTournament:
         if rounds:
             for round in rounds:
                 serialized_round = {
-                    "all_matchs": self.serialized_matches(round.all_matchs[0]),
+                    "all_matchs": self.serialized_matches(round.all_matchs),
                     "round_number": round.round_number,
                     "start_date": round.start_date.strftime("%d/%m/%Y, %H:%M:%S"),
                     "end_date": round.end_date.strftime("%d/%m/%Y, %H:%M:%S"),
@@ -34,6 +34,7 @@ class SerializeTournament:
     def serialized_matches(self, matches):
         serialized_matches = []
         for match in matches:
+            (match,) = match
             serialized_match = {
                 "first_player": [match.first_player[0].id, match.first_player[1]],
                 "second_player": [match.second_player[0].id, match.second_player[1]],

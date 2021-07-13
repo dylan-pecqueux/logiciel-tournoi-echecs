@@ -11,7 +11,7 @@ class TournamentView(Components):
     def display_tournament_info(self, tournament):
         print("\033c")
         self.console.print(
-            f"[bold red] {tournament.name}[/bold red]\n\n [blue]À {tournament.location}, du {tournament.start_date} au {tournament.end_date}\n {tournament.number_of_turns} tours et {tournament.time_control} en controle du temps.\n\n Commentaire :\n[/blue] {tournament.description}"
+            f"[bold red] {tournament.name}[/bold red]\n\n [blue]À {tournament.location}, du {tournament.start_date.date()} au {tournament.end_date.date()}\n {tournament.number_of_turns} tours et {tournament.time_control} en controle du temps.\n\n Commentaire :\n[/blue] {tournament.description}"
         )
         if len(tournament.rounds) >= 4:
             self.console.print("\nTournoi terminé", style="bold red")
@@ -38,7 +38,7 @@ class TournamentView(Components):
         self.console.print(
             f"Liste de tous les joueurs du tournoi par {order}: \n", style="bold red"
         )
-        self.players_table(players)
+        self.players_table(players, True)
         self.console.print(
             "\n1 - Joueurs par classement (défaut) \n"
             "2 - Joueurs par ordre alphabétique \n"
@@ -83,6 +83,7 @@ class TournamentView(Components):
         )
         self.rounds_table(tournament.rounds)
         self.console.print(
+            "\nEntrez le numero du round que vous voulez voir"
             "\n0 - Revenir au tournoi \n",
             style="bold magenta",
         )

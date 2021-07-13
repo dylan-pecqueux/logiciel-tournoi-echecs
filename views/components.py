@@ -6,13 +6,15 @@ class Components:
     def __init__(self):
         self.console = Console()
 
-    def players_table(self, players):
+    def players_table(self, players, players_list=False):
         table = Table(show_header=True, header_style="bold red")
         table.add_column("Classement", style="dim")
         table.add_column("Nom", justify="right")
         table.add_column("Genre", justify="right")
         table.add_column("Date de naissance", justify="right")
         for player in players:
+            if players_list:
+                player = player[0]
             table.add_row(
                 f"{player.classment}",
                 f"[magenta]{player.first_name} {player.last_name}[/magenta]",
@@ -81,18 +83,18 @@ class Components:
             )
         self.console.print(table)
 
-    def tournaments_table(self, tournaments):
+    def tournaments_table(self, tournaments, all_tournaments):
         table = Table(show_header=True, header_style="bold magenta")
         table.add_column("Numero", style="dim")
         table.add_column("Nom")
         table.add_column("Lieu", justify="right")
         table.add_column("Date", justify="right")
         for tournament in tournaments:
-            index = tournaments.index(tournament)
+            index = all_tournaments.index(tournament)
             table.add_row(
                 f"{index + 1}",
                 tournament.name,
                 tournament.location,
-                f"Du {tournament.start_date} au {tournament.end_date}",
+                f"Du {tournament.start_date.date()} au {tournament.end_date.date()}",
             )
         self.console.print(table)

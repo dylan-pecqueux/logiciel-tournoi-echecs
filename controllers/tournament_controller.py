@@ -34,7 +34,7 @@ class TournamentController:
         index_tournament_to_view = self.tournaments_view.display_all_tournaments(
             self.tournament_dao.get_tournaments()
         )
-        if index_tournament_to_view == "0":
+        if index_tournament_to_view == None:
             return
         else:
             tournament = self.tournament_dao.get_tournaments()[index_tournament_to_view]

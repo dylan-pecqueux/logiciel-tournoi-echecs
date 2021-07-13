@@ -62,6 +62,7 @@ class NewTournamentView:
                 player_to_add = input("=> ")
                 player_selection = self.list_of_players[int(player_to_add)]
                 players.append([player_selection, 0])
+            print("\033c")
             self.console.print(
                 "\nVoulez-vous ajouter encore des joueurs ? (y/n)", style="bold red"
             )
@@ -90,11 +91,13 @@ class NewTournamentView:
             return self.general_input(message)
 
     def input_start_date(self):
-        self.console.print("Entrez la date de début : ", style="bold magenta")
+        self.console.print(
+            "Entrez la date de début : (jj/mm/aaaa)", style="bold magenta"
+        )
         user_input = input("=> ")
         try:
             date = datetime.strptime(user_input, "%d/%m/%Y")
-            if date > date.now():
+            if date.date() >= date.now().date():
                 print("\033c")
                 return date
             else:
@@ -107,11 +110,11 @@ class NewTournamentView:
             self.input_start_date()
 
     def input_end_date(self, start_date):
-        self.console.print("Entrez la date de fin : ", style="bold magenta")
+        self.console.print("Entrez la date de fin : (jj/mm/aaaa)", style="bold magenta")
         user_input = input("=> ")
         try:
             date = datetime.strptime(user_input, "%d/%m/%Y")
-            if date >= start_date:
+            if date.date() >= start_date.date():
                 print("\033c")
                 return date
             else:
