@@ -1,5 +1,4 @@
 from models.tournament import Tournament
-from models.round import Round
 from views.tournament_view import TournamentView
 from views.tournaments_view import TournamentsView
 from views.new_tournament_view import NewTournamentView
@@ -34,7 +33,7 @@ class TournamentController:
         index_tournament_to_view = self.tournaments_view.display_all_tournaments(
             self.tournament_dao.get_tournaments()
         )
-        if index_tournament_to_view == None:
+        if index_tournament_to_view is None:
             return
         else:
             tournament = self.tournament_dao.get_tournaments()[index_tournament_to_view]
@@ -66,7 +65,7 @@ class TournamentController:
         user_choice = self.tournament_view.display_all_rounds(tournament)
         try:
             selected_round = tournament.rounds[int(user_choice) - 1]
-        except:
+        except Exception:
             selected_round = None
         if selected_round:
             self.view_info_round(selected_round)

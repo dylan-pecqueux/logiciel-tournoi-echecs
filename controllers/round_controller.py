@@ -10,7 +10,8 @@ class RoundController:
         self.round_number = round_number
 
     def first_pair_generation(self, tournament):
-        """Swiss algo : Split in two list players list by middle and associate the player with the same index in the other list"""
+        """Swiss algo : Split in two list players list by middle
+        and associate the player with the same index in the other list"""
         lenght = len(tournament.players_list) // 2
         first_list = tournament.players_list[:lenght]
         second_list = tournament.players_list[lenght:]

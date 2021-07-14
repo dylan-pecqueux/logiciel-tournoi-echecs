@@ -1,6 +1,3 @@
-from datetime import datetime
-
-
 class SerializeTournament:
     def serialized_tournament(self, tournament):
         serialized_tournament = {

@@ -9,4 +9,5 @@ class Match:
         self.second_player[0].play_match(self)
 
     def __str__(self):
-        return f"{self.first_player[0].first_name} {self.first_player[0].last_name} contre {self.second_player[0].first_name} {self.second_player[0].last_name}"
+        return f"{self.first_player[0].first_name} {self.first_player[0].last_name} contre \
+        {self.second_player[0].first_name} {self.second_player[0].last_name}"

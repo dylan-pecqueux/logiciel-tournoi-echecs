@@ -66,7 +66,8 @@ class Components:
                 winner = f"{match.second_player[0].first_name} {match.second_player[0].last_name}"
             table.add_row(
                 f"{index + 1}",
-                f"[bold red]{match.first_player[0].first_name} {match.first_player[0].last_name}[/bold red] contre [bold red]{match.second_player[0].first_name} {match.second_player[0].last_name}[/bold red]",
+                f"[bold red]{match.first_player[0].first_name} {match.first_player[0].last_name}[/bold red] \
+                contre [bold red]{match.second_player[0].first_name} {match.second_player[0].last_name}[/bold red]",
                 winner,
             )
         self.console.print(table)
@@ -79,7 +80,8 @@ class Components:
             (match,) = match
             table.add_row(
                 f"{index + 1}",
-                f"[bold red]{match.first_player[0].first_name} {match.first_player[0].last_name}[/bold red] contre [bold red]{match.second_player[0].first_name} {match.second_player[0].last_name}[/bold red]",
+                f"[bold red]{match.first_player[0].first_name} {match.first_player[0].last_name}[/bold red] \
+                contre [bold red]{match.second_player[0].first_name} {match.second_player[0].last_name}[/bold red]",
             )
         self.console.print(table)
 

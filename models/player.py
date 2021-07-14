@@ -28,4 +28,5 @@ class Player:
 
     def __str__(self):
         """Used for print player in view"""
-        return f" {self.first_name} {self.last_name}\n {self.sex}\n né le : {self.date_of_birth}\n classement : {self.classment}"
+        return f" {self.first_name} {self.last_name}\n {self.sex}\n né le : {self.date_of_birth}\n \
+        classement : {self.classment}"

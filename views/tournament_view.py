@@ -11,7 +11,9 @@ class TournamentView(Components):
     def display_tournament_info(self, tournament):
         print("\033c")
         self.console.print(
-            f"[bold red] {tournament.name}[/bold red]\n\n [blue]À {tournament.location}, du {tournament.start_date.date()} au {tournament.end_date.date()}\n {tournament.number_of_turns} tours et {tournament.time_control} en controle du temps.\n\n Commentaire :\n[/blue] {tournament.description}"
+            f"[bold red] {tournament.name}[/bold red]\n\n [blue]À {tournament.location}, du {tournament.start_date.date()} \
+            au {tournament.end_date.date()}\n {tournament.number_of_turns} tours et {tournament.time_control} \
+            en controle du temps.\n\n Commentaire :\n[/blue] {tournament.description}"
         )
         if len(tournament.rounds) >= 4:
             self.console.print("\nTournoi terminé", style="bold red")

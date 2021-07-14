@@ -1,5 +1,4 @@
 from rich.console import Console
-from rich.table import Table
 from views.components import Components
 
 
@@ -15,12 +14,12 @@ class RoundView(Components):
             style="bold red",
         )
         self.console.print(
-            f"\nVoici les prochains matchs : \n",
+            "\nVoici les prochains matchs : \n",
             style="bold red",
         )
         self.matches_table(round.all_matchs)
         self.console.print(
-            f'\nEntrez "y" quand le round est terminer, pour passer à la notation des scores : ',
+            '\nEntrez "y" quand le round est terminer, pour passer à la notation des scores : ',
             style="bold red",
         )
         end_of_round = input("=> ")

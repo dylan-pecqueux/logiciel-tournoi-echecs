@@ -21,8 +21,7 @@ class TournamentsView(Components):
         future_tournaments = []
         for tournament in tournaments:
             if (
-                tournament.end_date.date() >= now
-                and tournament.start_date.date() >= now
+                tournament.end_date.date() >= now and tournament.start_date.date() <= now
             ):
                 present_tournaments.append(tournament)
             elif tournament.start_date.date() > now:

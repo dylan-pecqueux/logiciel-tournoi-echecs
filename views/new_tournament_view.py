@@ -105,7 +105,7 @@ class NewTournamentView:
                     "\nVeuillez entrer une date future\n", style="bold red"
                 )
                 return self.input_start_date()
-        except:
+        except Exception:
             self.console.print("\nFormat invalide\n", style="bold red")
             self.input_start_date()
 
@@ -123,7 +123,7 @@ class NewTournamentView:
                     style="bold red",
                 )
                 return self.input_end_date(start_date)
-        except:
+        except Exception:
             self.console.print("\nFormat invalide\n", style="bold red")
             self.input_end_date(start_date)
 

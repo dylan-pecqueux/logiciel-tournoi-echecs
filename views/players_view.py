@@ -59,7 +59,7 @@ class PlayersView(Components):
         date_of_birth = input("=> ")
         if date_of_birth:
             validation = re.match(
-                "^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$",
+                r"^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$",
                 date_of_birth,
             )
             if validation:
@@ -91,7 +91,7 @@ class PlayersView(Components):
             style="bold magenta",
         )
         classment = input("=> ")
-        validation = re.match("^\d+$", classment)
+        validation = re.match(r"^\d+$", classment)
         if validation:
             print("\033c")
             return classment
